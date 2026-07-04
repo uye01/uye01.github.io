@@ -3,302 +3,550 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hankyeol Kim — Seoul National University</title>
+<title>Hankyeol Kim - Profile</title>
 <meta name="description" content="Hankyeol Kim — M.S. student in Industrial Engineering at Seoul National University (DSBA Lab).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --text: #1B1E24;
+    --bg: #FBFBF9;
+    --card: #FFFFFF;
+    --text: #1E2128;
     --muted: #5F6672;
-    --faint: #9AA0AB;
-    --line: #E8E9EC;
-    --link: #1A56C4;
+    --faint: #969CA8;
+    --line: #E8E8E3;
+    --accent: #2C46C7;      /* ultramarine */
+    --accent-2: #3FBBD8;    /* signal cyan */
+    --accent-tint: #F0F3FE;
+    --head: "Space Grotesk", sans-serif;
+    --body: "Public Sans", -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
-    background: #FFFFFF;
+    background: var(--bg);
     color: var(--text);
-    font-family: "Public Sans", -apple-system, "Segoe UI", sans-serif;
-    font-size: 15.5px;
+    font-family: var(--body);
+    font-size: 15px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap { max-width: 720px; margin: 0 auto; padding: 64px 24px 72px; }
-
-  a {
-    color: var(--link);
-    text-decoration: none;
-  }
+  a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 
-  /* ---------- profile ---------- */
-  .profile {
+  /* ================= TOP NAV ================= */
+  header.top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(251,251,249,0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  header.top .bar {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 13px 28px;
     display: flex;
-    gap: 32px;
+    justify-content: space-between;
     align-items: center;
+    gap: 16px;
   }
-  .profile img {
-    width: 128px;
+  header.top .brand {
+    font-family: var(--head);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  header.top .brand:hover { text-decoration: none; color: var(--accent); }
+  header.top nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  header.top nav a {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  header.top nav a:hover { color: var(--accent); text-decoration: none; }
+
+  section { scroll-margin-top: 72px; }
+
+  /* ================= LAYOUT ================= */
+  .layout {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  /* ================= SIDEBAR ================= */
+  aside { position: sticky; top: 96px; }
+  aside img.photo {
+    width: 100%;
+    max-width: 220px;
     height: auto;
-    border-radius: 8px;
-    flex-shrink: 0;
+    border-radius: 12px;
+    display: block;
   }
-  .profile h1 {
-    font-size: 30px;
+  aside h1 {
+    font-family: var(--head);
+    font-size: 26px;
     font-weight: 600;
     letter-spacing: -0.01em;
-    line-height: 1.2;
+    margin-top: 20px;
   }
-  .profile .role {
-    margin-top: 8px;
-    color: var(--muted);
-    font-size: 15px;
+  /* 이름 아래 스펙트럼 헤어라인 */
+  aside .spectrum {
+    width: 64px;
+    height: 3px;
+    border-radius: 3px;
+    margin: 12px 0 14px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
   }
-  .profile .contact {
-    margin-top: 12px;
-    font-size: 14px;
-    color: var(--faint);
-  }
-  .profile .contact span { margin: 0 7px; color: var(--line); }
+  aside .role { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+  aside .role b { color: var(--text); font-weight: 600; }
 
-  /* ---------- sections ---------- */
-  section { margin-top: 52px; }
+  aside .side-links { margin-top: 22px; list-style: none; }
+  aside .side-links li + li { margin-top: 7px; }
+  aside .side-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  aside .side-links a:hover { color: var(--accent); text-decoration: none; }
+  aside .side-links svg { width: 15px; height: 15px; flex-shrink: 0; fill: currentColor; opacity: .75; }
+
+  /* ================= MAIN ================= */
+  main { min-width: 0; }
+
+  section + section { margin-top: 44px; }
+
   h2 {
-    font-size: 13px;
+    font-family: var(--head);
+    font-size: 19px;
     font-weight: 600;
-    letter-spacing: .1em;
-    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  h2 .tick {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    flex-shrink: 0;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 26px;
+  }
+
+  /* ---------- about ---------- */
+  .about p { color: var(--muted); }
+  .about .hl { color: var(--text); font-weight: 500; }
+  .interests {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 5px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--bg);
     color: var(--muted);
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 6px;
   }
+  .chip .k {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .06em;
+    color: var(--accent);
+  }
+  .chip.past { opacity: .82; }
+  .chip .k.past { color: var(--muted); }
+  .chip .k.next { color: var(--accent-2); }
+  .cv-link {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .cv-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+  .cv-link svg { width: 15px; height: 15px; fill: currentColor; }
 
-  /* ---------- generic rows (education, experience) ---------- */
-  .row {
+  /* ---------- logo ---------- */
+  .logo {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    object-fit: contain;
+    padding: 5px;
+  }
+  .logo.noimg { visibility: hidden; }
+
+  /* ---------- rows (education, experience, projects) ---------- */
+  .rows .row {
     display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 22px;
-    padding: 16px 0;
+    grid-template-columns: 40px 1fr 158px;
+    gap: 16px;
+    padding: 15px 0;
   }
-  .row + .row { border-top: 1px solid var(--line); }
-  .dates { font-size: 13px; color: var(--faint); padding-top: 3px; }
-  .row h3 { font-size: 15.5px; font-weight: 600; }
-  .row .sub { margin-top: 2px; font-size: 14px; color: var(--muted); }
+  .rows .row + .row { border-top: 1px solid var(--line); }
+  .rows .row:first-child { padding-top: 4px; }
+  .rows .row:last-child { padding-bottom: 4px; }
+  .dates {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+    text-align: right;
+    padding-top: 3px;
+    white-space: nowrap;
+  }
+  .rows h3 { font-size: 15px; font-weight: 600; }
+  .rows .sub { margin-top: 2px; font-size: 13.5px; color: var(--muted); }
 
-  /* project lists inside experience */
   .plist { margin-top: 8px; list-style: none; }
   .plist li {
     position: relative;
     padding: 2px 0 2px 16px;
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--muted);
   }
-  .plist li::before { content: "·"; position: absolute; left: 2px; }
+  .plist li::before { content: ""; position: absolute; left: 2px; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-2); opacity: .6; }
   .plist .client { color: var(--text); font-weight: 500; }
 
   .subrole { margin-top: 12px; }
   .subrole .rt { font-size: 14px; font-weight: 600; }
-  .subrole .rt .rd { font-weight: 400; color: var(--faint); font-size: 13px; }
+  .subrole .rt .rd { font-weight: 400; color: var(--faint); font-size: 12px; font-family: var(--mono); }
 
-  /* ---------- publications ---------- */
-  .pub { padding: 18px 0; }
+  /* ---------- publications (텍스트 전용) ---------- */
+  .pub { padding: 16px 0; }
   .pub + .pub { border-top: 1px solid var(--line); }
+  .pub:first-child { padding-top: 4px; }
+  .pub:last-child { padding-bottom: 4px; }
   .pub h3 { font-size: 15.5px; font-weight: 600; line-height: 1.5; }
-  .pub .authors { margin-top: 3px; font-size: 14px; color: var(--muted); }
+  .pub .authors { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
   .pub .authors .me { font-weight: 600; color: var(--text); }
-  .pub .meta {
-    margin-top: 8px;
-    font-size: 13.5px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
+  .pub .venue {
+    margin-top: 5px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
   }
-  .pub .venue { color: var(--faint); font-style: italic; }
-  .pub .meta a {
-    border: 1px solid var(--line);
-    border-radius: 5px;
-    padding: 2px 10px;
-    font-weight: 500;
-  }
-  .pub .meta a:hover { border-color: var(--link); text-decoration: none; }
-
-  /* ---------- research projects ---------- */
-  .proj { padding: 14px 0; }
-  .proj + .proj { border-top: 1px solid var(--line); }
-  .proj h3 { font-size: 15px; font-weight: 500; line-height: 1.55; }
-  .proj .info { margin-top: 3px; font-size: 13.5px; color: var(--faint); }
-
-  /* ---------- footer ---------- */
-  footer {
-    margin-top: 64px;
-    padding-top: 20px;
-    border-top: 1px solid var(--line);
+  .pub .btns { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .pub .btns a {
     font-size: 12.5px;
+    font-weight: 500;
+    padding: 3px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    transition: color .15s, border-color .15s, background .15s;
+  }
+  .pub .btns a:hover {
+    text-decoration: none;
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-tint);
+  }
+
+  footer {
+    margin-top: 56px;
+    font-size: 12px;
     color: var(--faint);
   }
 
-  /* ---------- responsive ---------- */
-  @media (max-width: 560px) {
-    .wrap { padding-top: 44px; }
-    .profile { flex-direction: column; align-items: flex-start; gap: 20px; }
-    .profile img { width: 112px; }
-    .row { grid-template-columns: 1fr; gap: 4px; }
-    .dates { padding-top: 0; }
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; gap: 40px; padding-top: 36px; }
+    aside { position: static; display: grid; grid-template-columns: 128px 1fr; gap: 22px; align-items: center; }
+    aside img.photo { max-width: 128px; }
+    aside h1 { margin-top: 0; }
+    aside .side-links { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+    aside .side-links li + li { margin-top: 0; }
+    .rows .row { grid-template-columns: 40px 1fr; }
+    .rows .row .dates { grid-column: 2; text-align: left; padding-top: 0; }
+    header.top nav { gap: 8px 14px; }
+    header.top nav a { font-size: 12.5px; }
+    header.top .brand { display: none; }
+    header.top .bar { justify-content: flex-start; padding-block: 11px; }
+  }
+  @media (max-width: 480px) {
+    aside { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <!-- ============ PROFILE ============ -->
-  <div class="profile">
-    <img src="profile.jpg" alt="Portrait of Hankyeol Kim" width="520" height="624">
+<!-- ================= TOP NAV ================= -->
+<header class="top">
+  <div class="bar">
+    <a class="brand" href="#">Hankyeol Kim</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside>
+    <div><img class="photo" src="profile.jpg" alt="Portrait of Hankyeol Kim" width="520" height="624"></div>
     <div>
       <h1>Hankyeol Kim</h1>
+      <div class="spectrum"></div>
       <p class="role">
-        M.S. student in Industrial Engineering, Seoul National University<br>
-        <a href="http://dsba.snu.ac.kr" target="_blank" rel="noopener">Data Science &amp; Business Analytics Lab</a> · Advisor: Prof. Pilsung Kang
-        <!-- ✏️ 연구실 홈페이지 URL이 다르면 위 링크를 수정하세요 -->
+        M.S. Student<br>
+        Industrial Engineering<br>
+        <b>Seoul National University</b><br>
+        <a href="http://dsba.snu.ac.kr" target="_blank" rel="noopener">DSBA Lab</a>
+        <!-- ✏️ 연구실 홈페이지 URL이 다르면 수정하세요 -->
       </p>
-      <p class="contact">
-        <a href="mailto:hankyeol@snu.ac.kr">hankyeol@snu.ac.kr</a><span>|</span><a href="https://github.com/uye01" target="_blank" rel="noopener">GitHub</a><span>|</span><a href="#" target="_blank" rel="noopener">LinkedIn</a>
-        <!-- ✏️ LinkedIn URL을 위 href="#"에 넣으세요. CV PDF를 올리면 <span>|</span><a href="cv.pdf">CV</a>를 추가할 수 있습니다 -->
-      </p>
+      <ul class="side-links">
+        <li><a href="mailto:hankyeol@snu.ac.kr">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.24-8 5-8-5V6.51l8 5 8-5v1.73z"/></svg>
+          hankyeol@snu.ac.kr</a></li>
+        <li><a href="https://github.com/uye01" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.91c.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.15c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+          GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/hankyeol-kim-798641266/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.75H5.67v8.59h2.67zM7 8.58a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 9.76v-4.71c0-2.52-1.34-3.69-3.14-3.69-1.45 0-2.1.8-2.46 1.36V9.75h-2.67c.04.76 0 8.59 0 8.59h2.67v-4.8c0-.26.02-.51.1-.7.19-.48.63-.98 1.37-.98.97 0 1.46.74 1.46 1.83v4.65h2.67z"/></svg>
+          LinkedIn</a></li>
+        <li><a href="https://scholar.google.com/citations?user=TeoE3EAAAAAJ&hl=ko&oi=ao" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+          Google Scholar</a></li>
+      </ul>
     </div>
-  </div>
+  </aside>
 
-  <!-- ============ EDUCATION ============ -->
-  <section id="education">
-    <h2>Education</h2>
-    <div class="row">
-      <div class="dates">Mar 2025 — Present</div>
-      <div>
-        <h3>Seoul National University · M.S. in Industrial Engineering</h3>
-        <p class="sub">Data Science &amp; Business Analytics (DSBA) Lab · Advisor: Prof. Pilsung Kang</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="dates">Mar 2020 — Feb 2025</div>
-      <div>
-        <h3>Seoul National University · B.S. in Physics and Astronomy</h3>
-        <p class="sub">Department of Physics and Astronomy</p>
-      </div>
-    </div>
-  </section>
+  <!-- ================= MAIN ================= -->
+  <main>
 
-  <!-- ============ PUBLICATIONS ============ -->
-  <section id="publications">
-    <h2>Publications</h2>
-
-    <article class="pub">
-      <h3>Asking Is Not Enough: Protocol Sensitivity in LLM Confidence Calibration</h3>
-      <p class="authors"><span class="me">Hankyeol Kim</span>, Pilsung Kang&dagger;</p>
-      <div class="meta">
-        <span class="venue">Under review, 2026</span>
-        <a href="#">Paper</a>
-        <a href="#">Code</a>
-        <!-- ✏️ 위 href="#"에 arXiv/논문 링크와 GitHub 저장소 링크를 넣으세요.
-             링크가 아직 없다면 해당 <a> 태그를 지워두면 됩니다 -->
-      </div>
-    </article>
-
-    <article class="pub">
-      <h3>naPINN: Noise-Adaptive Physics-Informed Neural Networks for Recovering Physics from Corrupted Measurement</h3>
-      <p class="authors"><span class="me">Hankyeol Kim</span>, Pilsung Kang&dagger;</p>
-      <div class="meta">
-        <span class="venue">Under review, 2026</span>
-        <a href="#">Paper</a>
-        <a href="#">Code</a>
-      </div>
-    </article>
-  </section>
-
-  <!-- ============ RESEARCH PROJECTS ============ -->
-  <section id="projects">
-    <h2>Research Projects</h2>
-
-    <div class="proj">
-      <h3>Machine Learning Model for CapL Prediction via InLine ICBV Learning (i-TAP)</h3>
-      <p class="info">SK hynix Inc. · May 2026 — Present</p>
-    </div>
-    <div class="proj">
-      <h3>Contextual Bandit–Based Policy Optimization Framework for Insurance Restructuring Strategy Selection and Combination</h3>
-      <p class="info">Meritz Fire &amp; Marine Insurance Co., Ltd. · Apr 2026 — Present</p>
-    </div>
-    <div class="proj">
-      <h3>Data Construction and Optimization for Training/Inference of an Information Retriever</h3>
-      <p class="info">Samsung Fire &amp; Marine Insurance Co., Ltd. · Mar 2025 — Mar 2026</p>
-    </div>
-    <div class="proj">
-      <h3>Anomalous Situation Detection Based on Individual Daily Patterns Using Location Information</h3>
-      <p class="info">Electronics and Telecommunications Research Institute (ETRI) · Jul 2025 — Nov 2025</p>
-    </div>
-  </section>
-
-  <!-- ============ PROFESSIONAL EXPERIENCE ============ -->
-  <section id="experience">
-    <h2>Professional Experience</h2>
-
-    <div class="row">
-      <div class="dates">Feb 2024 — Nov 2024</div>
-      <div>
-        <h3>Lunosoft Inc. · Project Manager</h3>
-        <ul class="plist">
-          <li><i>Druid Rising: Idle RPG</i></li>
-          <li><i>2026 Trash King: Idle Tycoon</i></li>
-          <li><i>Love Revolution: Hidden Object</i></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="dates">Dec 2022 — Feb 2024</div>
-      <div>
-        <h3>AIARA Inc.</h3>
-
-        <div class="subrole">
-          <div class="rt">Project Management Team Leader <span class="rd">· May 2023 — Feb 2024</span></div>
+    <!-- ---------- ABOUT ---------- -->
+    <section id="about" class="about">
+      <h2><span class="tick"></span>About</h2>
+      <div class="card">
+        <p>
+          Hi! I am Hankyeol Kim, an M.S. student in Industrial Engineering at
+          Seoul National University (SNU), advised by Prof. Pilsung Kang in the
+          Data Science &amp; Business Analytics Lab, and I received my B.S. in
+          Physics and Astronomy from SNU. My past work spanned
+          <span class="hl">physics-informed neural networks</span> and
+          <span class="hl">LLM confidence</span>; I am now working on
+          <span class="hl">spatiotemporal diffusion</span> and
+          <span class="hl">visual reasoning of VLMs</span>. In the long term,
+          I am pursuing <span class="hl">physical AI</span>.
+        </p>
+        <div class="interests">
+          <span class="chip past"><span class="k past">PAST</span>Physics-Informed Neural Networks</span>
+          <span class="chip past"><span class="k past">PAST</span>LLM confidence</span>
+          <span class="chip"><span class="k">NOW</span>Spatiotemporal Diffusion</span>
+          <span class="chip"><span class="k">NOW</span>Visual Reasoning of VLMs</span>
+          <span class="chip"><span class="k next">NEXT</span>Physical AI</span>
         </div>
-
-        <div class="subrole">
-          <div class="rt">Project Manager <span class="rd">· Dec 2022 — Feb 2024</span></div>
-          <ul class="plist">
-            <li><span class="client">Samsung Electronics</span> — Virtual 3D Homescreen &amp; Memory Link</li>
-            <li><span class="client">E-MART</span> — Reward-based web game <i>Emart Farm</i></li>
-            <li><span class="client">Megastudy Education</span> — Kids’ content <i>Elihigh Kids Character Room</i></li>
-            <li><span class="client">Megastudy Education</span> — <i>Mystical AR Nature Observation</i></li>
-            <li><span class="client">Seoul National University Hospital</span> — Long-term follow-up management app for childhood cancer survivors</li>
-          </ul>
-        </div>
-
-        <div class="subrole">
-          <div class="rt">App Developer <span class="rd">· May 2023 — Jan 2024</span></div>
-          <ul class="plist">
-            <li><span class="client">LUXROBO</span> — IoT Smart Home on-premises app</li>
-          </ul>
+        <div class="cv-link">
+          <a href="cv.pdf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"/></svg>
+            Curriculum Vitae
+          </a>
+          <!-- ✏️ CV PDF 파일을 저장소에 "cv.pdf"라는 이름으로 업로드하면 이 링크가 동작합니다.
+               파일명이 다르면 위 href를 수정하세요 -->
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="row">
-      <div class="dates">Dec 2023 — Mar 2024</div>
-      <div>
-        <h3>SBA SeSAC · Boost Camp Mentor</h3>
-        <p class="sub">Service Design</p>
+    <!-- ---------- EDUCATION ---------- -->
+    <section id="education">
+      <h2><span class="tick"></span>Education</h2>
+      <div class="card rows">
+        <!-- ✏️ 로고: 저장소에 logos/ 폴더를 만들어 아래 파일명으로 이미지를 올리면 자동 표시됩니다.
+             이미지가 없는 동안에는 해당 칸이 빈 자리로만 유지됩니다 (정사각형 PNG 권장) -->
+        <div class="row">
+          <img class="logo" src="logos/snu.png" alt="" onerror="this.classList.add('noimg')">
+          <div>
+            <h3>Seoul National University · M.S. in Industrial Engineering</h3>
+            <p class="sub">Data Science &amp; Business Analytics (DSBA) Lab</p>
+            <p class="sub">Advisor: <a href="https://dsba.snu.ac.kr/professor/">Prof. Pilsung Kang</a></p>
+          </div>
+          <div class="dates">Mar 2025 — Present</div>
+        </div>
+        <div class="row">
+          <img class="logo" src="logos/snu.png" alt="" onerror="this.classList.add('noimg')">
+          <div>
+            <h3>Seoul National University · B.S. in Physics and Astronomy</h3>
+            <p class="sub">Department of Physics and Astronomy</p>
+          </div>
+          <div class="dates">Mar 2020 — Feb 2025</div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>© 2026 Hankyeol Kim</footer>
+    <!-- ---------- PROFESSIONAL EXPERIENCE ---------- -->
+    <section id="experience">
+      <h2><span class="tick"></span>Professional Experience</h2>
+      <div class="card rows">
 
+        <div class="row">
+          <img class="logo" src="logos/lunosoft.png" alt="" onerror="this.classList.add('noimg')">
+          <div>
+            <h3>Lunosoft Inc. · Project Manager</h3>
+            <ul class="plist">
+              <li><i>Druid Rising: Idle RPG</i></li>
+              <li><i>2026 Trash King: Idle Tycoon</i></li>
+              <li><i>Love Revolution: Hidden Object</i></li>
+            </ul>
+          </div>
+          <div class="dates">Feb 2024 — Nov 2024</div>
+        </div>
+
+        <div class="row">
+          <img class="logo" src="logos/aiara.png" alt="" onerror="this.classList.add('noimg')">
+          <div>
+            <h3>AIARA Inc.</h3>
+            <div class="subrole">
+              <div class="rt">Project Management Team Leader <span class="rd">· May 2023 — Feb 2024</span></div>
+            </div>
+            <div class="subrole">
+              <div class="rt">Project Manager <span class="rd">· Dec 2022 — Feb 2024</span></div>
+              <ul class="plist">
+                <li><span class="client">Samsung Electronics</span> — Virtual 3D Homescreen &amp; Memory Link</li>
+                <li><span class="client">E-MART</span> — Reward-based web game <i>Emart Farm</i></li>
+                <li><span class="client">Megastudy Education</span> — Kids’ content <i>Elihigh Kids Character Room</i></li>
+                <li><span class="client">Megastudy Education</span> — <i>Mystical AR Nature Observation</i></li>
+                <li><span class="client">Seoul National University Hospital</span> — Long-term follow-up management app for childhood cancer survivors</li>
+              </ul>
+            </div>
+            <div class="subrole">
+              <div class="rt">App Developer <span class="rd">· May 2023 — Jan 2024</span></div>
+              <ul class="plist">
+                <li><span class="client">LUXROBO</span> — IoT Smart Home on-premises app</li>
+              </ul>
+            </div>
+          </div>
+          <div class="dates">Dec 2022 — Feb 2024</div>
+        </div>
+
+        <div class="row">
+          <img class="logo" src="logos/sesac.png" alt="" onerror="this.classList.add('noimg')">
+          <div>
+            <h3>SBA SeSAC · Boost Camp Mentor</h3>
+            <p class="sub">Service Design</p>
+          </div>
+          <div class="dates">Dec 2023 — Mar 2024</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------- PUBLICATIONS ---------- -->
+    <section id="publications">
+      <h2><span class="tick"></span>Publications</h2>
+      <div class="card">
+
+        <article class="pub">
+          <h3>Asking Is Not Enough: Protocol Sensitivity in LLM Confidence Calibration</h3>
+          <p class="authors"><span class="me">Hankyeol Kim</span>, Pilsung Kang&dagger;</p>
+          <p class="venue">Under review · 2026</p>
+          <div class="btns">
+            <a href="https://arxiv.org/abs/2605.27752">Paper</a>
+            <a href="https://github.com/uye01/asking-is-not-enough">Code</a>
+          </div>
+        </article>
+
+        <article class="pub">
+          <h3>naPINN: Noise-Adaptive Physics-Informed Neural Networks for Recovering Physics from Corrupted Measurement</h3>
+          <p class="authors"><span class="me">Hankyeol Kim</span>, Pilsung Kang&dagger;</p>
+          <p class="venue">Under review · 2026</p>
+          <div class="btns">
+            <a href="https://arxiv.org/abs/2602.02547">Paper</a>
+            <a href="https://github.com/uye01/naPINN">Code</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ---------- RESEARCH PROJECTS ---------- -->
+    <section id="projects">
+      <h2><span class="tick"></span>Research Projects</h2>
+      <div class="card rows">
+        <div class="row">
+          <img class="logo" src="logos/skhynix.png" alt="" onerror="this.classList.add('noimg')">
+          <div>
+            <h3>Machine Learning Model for CapL Prediction via InLine ICBV Learning (i-TAP)</h3>
+            <p class="sub">SK hynix Inc.</p>
+          </div>
+          <div class="dates">May 2026 — Present</div>
+        </div>
+        <div class="row">
+          <img class="logo" src="logos/meritz.png" alt="" onerror="this.classList.add('noimg')">
+          <div>
+            <h3>Contextual Bandit–Based Policy Optimization Framework for Insurance Restructuring Strategy Selection and Combination</h3>
+            <p class="sub">Meritz Fire &amp; Marine Insurance Co., Ltd.</p>
+          </div>
+          <div class="dates">Apr 2026 — Present</div>
+        </div>
+        <div class="row">
+          <img class="logo" src="logos/samsungfire.png" alt="" onerror="this.classList.add('noimg')">
+          <div>
+            <h3>Data Construction and Optimization for Training/Inference of an Information Retriever</h3>
+            <p class="sub">Samsung Fire &amp; Marine Insurance Co., Ltd.</p>
+          </div>
+          <div class="dates">Mar 2025 — Mar 2026</div>
+        </div>
+        <div class="row">
+          <img class="logo" src="logos/etri.png" alt="" onerror="this.classList.add('noimg')">
+          <div>
+            <h3>Anomalous Situation Detection Based on Individual Daily Patterns Using Location Information</h3>
+            <p class="sub">Electronics and Telecommunications Research Institute (ETRI)</p>
+          </div>
+          <div class="dates">Jul 2025 — Nov 2025</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2026 Hankyeol Kim · Last updated Jul 2026</footer>
+
+  </main>
 </div>
+
 </body>
 </html>
