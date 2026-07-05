@@ -410,6 +410,7 @@
   .rows .row:hover { background: var(--accent-tint); }
   .rows .row:hover::before { opacity: 1; transform: scaleY(1); }
   .rows .row + .row { border-top: 1px solid var(--line); }
+  .rows .row.single { align-items: center; }
   .rows .row:first-child { padding-top: 4px; }
   .rows .row:last-child { padding-bottom: 4px; }
   .dates {
@@ -645,16 +646,15 @@
           <img class="logo" src="logos/snu.png" alt="" onerror="this.classList.add('noimg')">
           <div>
             <h3>Seoul National University · M.S. in Industrial Engineering</h3>
-            <p class="sub">Data Science &amp; Business Analytics (DSBA) Lab</p>
+            <p class="sub">DSBA Lab</p>
             <p class="sub">Advisor: <a href="https://dsba.snu.ac.kr/professor/">Prof. Pilsung Kang</a></p>
           </div>
           <div class="dates">Mar 2025 — Present</div>
         </div>
-        <div class="row">
+        <div class="row single">
           <img class="logo" src="logos/snu.png" alt="" onerror="this.classList.add('noimg')">
           <div>
             <h3>Seoul National University · B.S. in Physics and Astronomy</h3>
-            <p class="sub">Department of Physics and Astronomy</p>
           </div>
           <div class="dates">Mar 2020 — Feb 2025</div>
         </div>
