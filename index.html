@@ -492,6 +492,22 @@
   .pub .btns a.paper:hover { color: var(--paper); border-color: var(--paper); background: var(--paper-bg); }
   .pub .btns a.code { color: var(--code); border-color: var(--code-bd); }
   .pub .btns a.code:hover { color: var(--code); border-color: var(--code); background: var(--code-bg); }
+  /* heading row with a right-aligned note (e.g. author-mark legend) */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-bottom: 18px;
+  }
+  .sec-head h2 { margin-bottom: 0; }
+  .pub-legend {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+  }
 
   footer {
     margin-top: 56px;
@@ -727,12 +743,15 @@
 
     <!-- ---------- PUBLICATIONS ---------- -->
     <section id="publications">
-      <h2><span class="tick"></span>Publications</h2>
+      <div class="sec-head">
+        <h2><span class="tick"></span>Publications</h2>
+        <p class="pub-legend">* Equal contribution / &dagger; Corresponding author</p>
+      </div>
       <div class="card">
         <article class="pub">
-          <h3>State-Space Dynamics for Temporal Diffusion Models</h3>
-          <p class="authors"> Woojun Lee*</span>, <span class="me">Hankyeol Kim*</span>, Pilsung Kang&dagger;</p>
-          <p class="venue">Preparing</p>
+          <h3>Dynamical State-Space Diffusion for Spatiotemporal Prediction</h3>
+          <p class="authors">Woojun Lee*, <span class="me">Hankyeol Kim*</span>, Pilsung Kang&dagger;</p>
+          <p class="venue">Under review · 2026</p>
         </article>
 
         <article class="pub">
