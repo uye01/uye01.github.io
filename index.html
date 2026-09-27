@@ -434,6 +434,29 @@
   .plist li::before { content: ""; position: absolute; left: 2px; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-2); opacity: .6; }
   .plist .client { color: var(--text); font-weight: 500; }
 
+  /* experience details fold away and unfold on row hover (hover-capable pointers only;
+     touch devices always see them expanded) */
+  .fold { display: grid; grid-template-rows: 1fr; }
+  .fold > div { overflow: hidden; min-height: 0; }
+  @media (hover: hover) and (pointer: fine) {
+    .fold {
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows .35s cubic-bezier(.2,.7,.2,1), opacity .25s ease;
+    }
+    .rows .row:hover .fold,
+    .rows .row:focus-within .fold { grid-template-rows: 1fr; opacity: 1; }
+    /* one-line rows: centered on the logo while folded; dates glide up to the title on unfold */
+    .rows .row.fold-center { align-items: center; }
+    .rows .row.fold-center .dates {
+      align-self: start;
+      padding-top: 11px;
+      transition: padding-top .35s cubic-bezier(.2,.7,.2,1);
+    }
+    .rows .row.fold-center:hover .dates,
+    .rows .row.fold-center:focus-within .dates { padding-top: 3px; }
+  }
+
   .subrole { margin-top: 12px; }
   .subrole .rt { font-size: 14px; font-weight: 600; }
   .subrole .rt .rd { font-weight: 400; color: var(--faint); font-size: 12px; font-family: var(--mono); }
@@ -542,6 +565,7 @@
     html { scroll-behavior: auto; }
     .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
     aside .spectrum, aside h1, .aurora::before, .aurora::after { animation: none !important; }
+    .fold, .rows .row.fold-center .dates { transition: none !important; }
     .rows .row, .rows .row::before,
     .pub, .pub::before, .chip, aside img.photo,
     header.top nav .nav-ind { transition: none !important; }
@@ -693,11 +717,13 @@
           <img class="logo" src="logos/lunosoft.png" alt="" onerror="this.classList.add('noimg')">
           <div>
             <h3>Lunosoft Inc. · Project Manager</h3>
-            <ul class="plist">
-              <li><i>Druid Rising: Idle RPG</i></li>
-              <li><i>2026 Trash King: Idle Tycoon</i></li>
-              <li><i>Love Revolution: Hidden Object</i></li>
-            </ul>
+            <div class="fold"><div>
+              <ul class="plist">
+                <li><i>Druid Rising: Idle RPG</i></li>
+                <li><i>2026 Trash King: Idle Tycoon</i></li>
+                <li><i>Love Revolution: Hidden Object</i></li>
+              </ul>
+            </div></div>
           </div>
           <div class="dates">Feb 2024 — Nov 2024</div>
         </div>
@@ -711,29 +737,33 @@
             </div>
             <div class="subrole">
               <div class="rt">Project Manager <span class="rd">· Dec 2022 — Feb 2024</span></div>
-              <ul class="plist">
-                <li><span class="client">Samsung Electronics</span> — Virtual 3D Homescreen &amp; Memory Link</li>
-                <li><span class="client">E-MART</span> — Reward-based web game <i>Emart Farm</i></li>
-                <li><span class="client">Megastudy Education</span> — Kids’ content <i>Elihigh Kids Character Room</i></li>
-                <li><span class="client">Megastudy Education</span> — <i>Mystical AR Nature Observation</i></li>
-                <li><span class="client">Seoul National University Hospital</span> — Long-term follow-up management app for childhood cancer survivors</li>
-              </ul>
+              <div class="fold"><div>
+                <ul class="plist">
+                  <li><span class="client">Samsung Electronics</span> — Virtual 3D Homescreen &amp; Memory Link</li>
+                  <li><span class="client">E-MART</span> — Reward-based web game <i>Emart Farm</i></li>
+                  <li><span class="client">Megastudy Education</span> — Kids’ content <i>Elihigh Kids Character Room</i></li>
+                  <li><span class="client">Megastudy Education</span> — <i>Mystical AR Nature Observation</i></li>
+                  <li><span class="client">Seoul National University Hospital</span> — Long-term follow-up management app for childhood cancer survivors</li>
+                </ul>
+              </div></div>
             </div>
             <div class="subrole">
               <div class="rt">App Developer <span class="rd">· May 2023 — Jan 2024</span></div>
-              <ul class="plist">
-                <li><span class="client">LUXROBO</span> — IoT Smart Home on-premises app</li>
-              </ul>
+              <div class="fold"><div>
+                <ul class="plist">
+                  <li><span class="client">LUXROBO</span> — IoT Smart Home on-premises app</li>
+                </ul>
+              </div></div>
             </div>
           </div>
           <div class="dates">Dec 2022 — Feb 2024</div>
         </div>
 
-        <div class="row">
+        <div class="row fold-center">
           <img class="logo" src="logos/sesac.png" alt="" onerror="this.classList.add('noimg')">
           <div>
             <h3>SBA SeSAC · Boost Camp Mentor</h3>
-            <p class="sub">Service Design</p>
+            <div class="fold"><div><p class="sub">Service Design</p></div></div>
           </div>
           <div class="dates">Dec 2023 — Mar 2024</div>
         </div>
