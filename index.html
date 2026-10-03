@@ -496,6 +496,8 @@
   }
   /* accepted venue stands out from the muted "under review" text */
   .pub .venue .accepted { color: var(--accent); font-weight: 500; }
+  /* keep each venue phrase whole so lines break at the "·" */
+  .pub .venue .nw { display: inline-block; }
   .pub .btns { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
   .pub .btns a {
     font-size: 12.5px;
@@ -799,7 +801,7 @@
         <article class="pub">
           <h3>naPINN: Noise-Adaptive Physics-Informed Neural Networks for Recovering Physics from Corrupted Measurement</h3>
           <p class="authors"><span class="me">Hankyeol Kim</span>, Pilsung Kang&dagger;</p>
-          <p class="venue"><span class="accepted">NeurIPS 2026 Sim2Science Workshop</span> · Main conference version under review</p>
+          <p class="venue"><span class="nw"><span class="accepted">NeurIPS 2026 Sim2Science Workshop</span> (acceptance rate: 42%)</span> · <span class="nw">Main conference version under review</span></p>
           <div class="btns">
             <a class="paper" href="https://arxiv.org/abs/2602.02547">Paper</a>
             <a class="code" href="https://github.com/uye01/naPINN">Code</a>
