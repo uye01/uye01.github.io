@@ -1,7 +1,7 @@
 # CLAUDE.md — Personal Academic Homepage (uye01.github.io)
 
 ## Project
-Personal academic homepage for **Hankyeol Kim** (M.S. student, Industrial Engineering, Seoul National University; DSBA Lab, advisor Prof. Pilsung Kang; B.S. in Physics and Astronomy, SNU).
+Personal academic homepage for **Hankyeol Kim** (Integrated M.S./Ph.D. student, Industrial Engineering, Seoul National University; DSBA Lab, advisor Prof. Pilsung Kang; B.S. in Physics and Astronomy, SNU).
 - Deployed via **GitHub Pages**, repo: `uye01/uye01.github.io`, branch `main`, root. Live at https://uye01.github.io
 - **Hand-written static site. No templates (al-folio etc.), no frameworks, no build system.** One `index.html` with inline CSS/JS + assets (`profile.jpg`, `logos/`, `cv.pdf`).
 - Communicate with the user **in Korean**. Code, comments in code, and site copy are in English.
