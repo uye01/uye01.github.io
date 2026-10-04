@@ -8,7 +8,7 @@ Personal academic homepage for **Hankyeol Kim** (Integrated M.S./Ph.D. student, 
 - **See [DESIGN_LOG.md](DESIGN_LOG.md)** for the current design system (theme tokens, dark mode, active effects) and the change history. When it disagrees with a rule below, the DESIGN_LOG reflects the newer decision.
 
 ## Hard content rules (settled after several iterations — do not revisit without asking)
-1. **Section order:** About → Education → Professional Experience → Publications → Research Projects.
+1. **Section order:** About → Education → Professional Experience → Publications → Research Projects → Other Activities (nav label "Activities"; Physical AI curriculum + DSBA YouTube link chips).
 2. **Sticky top nav** linking to each section.
 3. Sidebar (desktop-sticky): photo at top with name, role, affiliation, and contact links (email, GitHub, LinkedIn, **Google Scholar**) directly under the profile. **No separate Contact section.**
 4. **No Korean name (김한결) anywhere.**

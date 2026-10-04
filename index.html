@@ -357,6 +357,18 @@
     transform: translateY(-2px);
     opacity: 1;
   }
+  /* link chips (Other Activities): same pill as interest chips, with a leading icon */
+  a.link-chip { gap: 7px; }
+  a.link-chip:hover { text-decoration: none; }
+  a.link-chip svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+  a.link-chip .ic-book { color: var(--accent); }
+  a.link-chip .ic-yt { color: var(--code); }
+
+  /* ---------- other activities ---------- */
+  .act p { color: var(--muted); }
+  .act .chip { margin-top: 10px; }
+  .act + .act { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+
   .cv-link {
     margin-top: 18px;
     padding-top: 16px;
@@ -603,6 +615,7 @@
         <a href="#experience">Experience</a>
         <a href="#publications">Publications</a>
         <a href="#projects">Projects</a>
+        <a href="#activities">Activities</a>
       </nav>
       <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle light / dark">
         <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -838,6 +851,27 @@
             <p class="sub">Electronics and Telecommunications Research Institute (ETRI)</p>
           </div>
           <div class="dates">Jul 2025 — Nov 2025</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- OTHER ACTIVITIES ---------- -->
+    <section id="activities">
+      <h2><span class="tick"></span>Other Activities</h2>
+      <div class="card">
+        <div class="act">
+          <p>I designed our lab's Physical AI study curriculum, which is open to anyone who wants to follow along.</p>
+          <a class="chip link-chip" href="https://uye01.github.io/physical-ai-curriculum-2026/">
+            <svg class="ic-book" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 5c-1.1-.35-2.3-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+            Physical AI curriculum
+          </a>
+        </div>
+        <div class="act">
+          <p>Our lab regularly shares paper-review talks on its YouTube channel.</p>
+          <a class="chip link-chip" href="https://www.youtube.com/@dsba2979">
+            <svg class="ic-yt" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+            DSBA YouTube
+          </a>
         </div>
       </div>
     </section>
