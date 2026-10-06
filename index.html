@@ -876,7 +876,7 @@
       </div>
     </section>
 
-    <footer>© 2026 Hankyeol Kim · Last updated Sep 2026</footer>
+    <footer>© 2026 Hankyeol Kim · Last updated Sep 2026<span class="visits" hidden> · <span id="visit-count"></span> visits</span></footer>
 
   </main>
 </div>
@@ -981,6 +981,21 @@
 
 <!-- ✏️ GoatCounter analytics (cookie-free). Replace "uye01" if your GoatCounter site code differs. -->
 <script data-goatcounter="https://uye01.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+/* total visits in the footer; stays hidden if the counter is unavailable
+   (requires GoatCounter setting "Allow using the visitor counter") */
+(function () {
+  if (!window.fetch) return;
+  fetch('https://uye01.goatcounter.com/counter/TOTAL.json')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      if (!d || !d.count) return;
+      document.getElementById('visit-count').textContent = d.count;
+      document.querySelector('footer .visits').hidden = false;
+    })
+    .catch(function () {});
+})();
+</script>
 
 </body>
 </html>
