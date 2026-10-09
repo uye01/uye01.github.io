@@ -439,6 +439,12 @@
   }
   .rows h3 { font-size: 15px; font-weight: 600; }
   .rows .sub { margin-top: 2px; font-size: 13.5px; color: var(--muted); }
+  /* multi-line row (AIARA): title line centered on the 40px logo, dates level with it */
+  .rows h3.head-center { min-height: 40px; display: flex; align-items: center; }
+  @media (min-width: 861px) { .rows .row.head-row .dates { padding-top: 11px; } }
+  .rows .row.head-row h3 + .subrole { margin-top: 4px; }  /* the 40px title box already adds space */
+  /* role next to a company name: lighter so the company reads first */
+  .rows h3 .role { font-size: 13.5px; font-weight: 400; color: var(--muted); }
 
   .plist { margin-top: 8px; list-style: none; }
   .plist li {
@@ -464,6 +470,7 @@
     .rows .row:focus-within .fold { grid-template-rows: 1fr; opacity: 1; }
     /* one-line rows: centered on the logo while folded; dates glide up to the title on unfold */
     .rows .row.fold-center { align-items: center; }
+    .rows .row.fold-center .logo { align-self: start; }  /* stays at the top when a tall list unfolds */
     .rows .row.fold-center .dates {
       align-self: start;
       padding-top: 11px;
@@ -474,7 +481,7 @@
   }
 
   .subrole { margin-top: 12px; }
-  .subrole .rt { font-size: 14px; font-weight: 600; }
+  .subrole .rt { font-size: 13.5px; font-weight: 400; color: var(--muted); }  /* same as .rows h3 .role */
   .subrole .rt .rd { font-weight: 400; color: var(--faint); font-size: 12px; font-family: var(--mono); }
 
   /* ---------- publications (텍스트 전용) ---------- */
@@ -501,7 +508,7 @@
   .pub + .pub { border-top: 1px solid var(--line); }
   .pub:first-child { padding-top: 4px; }
   .pub:last-child { padding-bottom: 4px; }
-  .pub h3 { font-size: 15.5px; font-weight: 600; line-height: 1.5; }
+  .pub h3 { font-size: 15px; font-weight: 600; }  /* same as .rows h3 (size, weight, line-height) */
   .pub .authors { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
   .pub .authors .me { color: var(--me); }
   .pub .venue {
@@ -706,7 +713,7 @@
         <div class="row">
           <img class="logo" src="logos/snu.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>Seoul National University · Integrated M.S./Ph.D. in Industrial Engineering</h3>
+          <h3>Seoul National University · Integrated M.S./Ph.D. in Industrial Engineering</h3>
             <p class="sub">DSBA Lab</p>
             <p class="sub">Advisor: <a href="https://dsba.snu.ac.kr/professor/">Prof. Pilsung Kang</a></p>
           </div>
@@ -715,14 +722,14 @@
         <div class="row single">
           <img class="logo" src="logos/snu.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>Seoul National University · B.S. in Physics and Astronomy</h3>
+          <h3>Seoul National University · B.S. in Physics and Astronomy</h3>
           </div>
           <div class="dates">Mar 2020 — Feb 2025</div>
         </div>
         <div class="row single">
           <img class="logo" src="logos/has.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>Hana Academy Seoul</h3>
+          <h3>Hana Academy Seoul</h3>
           </div>
           <div class="dates">Mar 2017 — Feb 2020</div>
         </div>
@@ -734,10 +741,10 @@
       <h2><span class="tick"></span>Professional Experience</h2>
       <div class="card rows">
 
-        <div class="row">
+        <div class="row fold-center">
           <img class="logo" src="logos/lunosoft.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>Lunosoft Inc. · Project Manager</h3>
+          <h3>Lunosoft Inc. <span class="role">· Project Manager</span></h3>
             <div class="fold"><div>
               <ul class="plist">
                 <li><i>Druid Rising: Idle RPG</i></li>
@@ -749,10 +756,10 @@
           <div class="dates">Feb 2024 — Nov 2024</div>
         </div>
 
-        <div class="row">
+        <div class="row head-row">
           <img class="logo" src="logos/aiara.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>AIARA Inc.</h3>
+          <h3 class="head-center">AIARA Inc.</h3>
             <div class="subrole">
               <div class="rt">Project Management Team Leader <span class="rd">· May 2023 — Feb 2024</span></div>
             </div>
@@ -783,7 +790,7 @@
         <div class="row fold-center">
           <img class="logo" src="logos/sesac.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>SBA SeSAC · Boost Camp Mentor</h3>
+          <h3>SBA SeSAC <span class="role">· Boost Camp Mentor</span></h3>
             <div class="fold"><div><p class="sub">Service Design</p></div></div>
           </div>
           <div class="dates">Dec 2023 — Mar 2024</div>
@@ -841,7 +848,7 @@
         <div class="row">
           <img class="logo" src="logos/motie.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>Manufacturing AI Data Value Chain Construction Project</h3>
+          <h3>Manufacturing AI Data Value Chain Construction Project</h3>
             <p class="sub"><span class="nw">Korean Ministry of Trade, Industry and Energy (MOTIE)&nbsp;·</span> <span class="nw">National R&amp;D Project</span></p>
           </div>
           <div class="dates">Jul 2026 — Present</div>
@@ -849,7 +856,7 @@
         <div class="row">
           <img class="logo" src="logos/meritz.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>Contextual Bandit–Based Policy Optimization Framework for Insurance Restructuring Strategy Selection and Combination</h3>
+          <h3>Contextual Bandit–Based Policy Optimization Framework for Insurance Restructuring Strategy Selection and Combination</h3>
             <p class="sub">Meritz Fire &amp; Marine Insurance Co., Ltd.</p>
           </div>
           <div class="dates">Apr 2026 — Present</div>
@@ -857,7 +864,7 @@
         <div class="row">
           <img class="logo" src="logos/samsungfire.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>Data Construction and Optimization for Training/Inference of an Information Retriever</h3>
+          <h3>Data Construction and Optimization for Training/Inference of an Information Retriever</h3>
             <p class="sub">Samsung Fire &amp; Marine Insurance Co., Ltd.</p>
           </div>
           <div class="dates">Mar 2025 — Mar 2026</div>
@@ -865,7 +872,7 @@
         <div class="row">
           <img class="logo" src="logos/etri.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-            <h3>Anomalous Situation Detection Based on Individual Daily Patterns Using Location Information</h3>
+          <h3>Anomalous Situation Detection Based on Individual Daily Patterns Using Location Information</h3>
             <p class="sub">Electronics and Telecommunications Research Institute (ETRI)</p>
           </div>
           <div class="dates">Jul 2025 — Nov 2025</div>
