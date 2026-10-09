@@ -15,6 +15,8 @@
     --card: #FFFFFF;
     --text: #1E2128;
     --muted: #5F6672;
+    --me: #3E5BB8;          /* own name in author lists: blue at --muted's brightness */
+    --ok: #0A84A6;          /* accepted venue: deepened cyan (accent-2 is too light for text on white) */
     --faint: #969CA8;
     --line: #E8E8E3;
     --accent: #2C46C7;      /* ultramarine */
@@ -40,6 +42,8 @@
     --card: #161A24;
     --text: #ECEEF3;
     --muted: #9AA3B4;
+    --me: #8EA2EE;
+    --ok: #52D0EC;
     --faint: #6A7385;
     --line: #262C3A;
     --accent: #7C93FF;
@@ -499,7 +503,7 @@
   .pub:last-child { padding-bottom: 4px; }
   .pub h3 { font-size: 15.5px; font-weight: 600; line-height: 1.5; }
   .pub .authors { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
-  .pub .authors .me { font-weight: 600; color: var(--text); }
+  .pub .authors .me { color: var(--me); }
   .pub .venue {
     margin-top: 5px;
     font-family: var(--mono);
@@ -507,7 +511,7 @@
     color: var(--faint);
   }
   /* accepted venue stands out from the muted "under review" text */
-  .pub .venue .accepted { color: var(--accent); font-weight: 500; }
+  .pub .venue .accepted { color: var(--ok); font-weight: 500; }
   /* keep each phrase whole so lines break at the "·" (venue lines, project subtitles) */
   .nw { display: inline-block; }
   .pub .btns { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
