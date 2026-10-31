@@ -35,6 +35,7 @@ Personal academic homepage for **Hankyeol Kim** (Integrated M.S./Ph.D. student, 
 
 ## Current state & open TODOs
 - `index.html` now carries the full design system (dual light/dark, ambient effects — see DESIGN_LOG.md), plus `profile.jpg`, `logos/`, `cv.pdf`. LinkedIn URL and real Paper/Code arXiv/GitHub links are filled in by the user.
+- Visitor map (card above the footer, not a section): `.github/workflows/visitors.yml` writes `visitors.json` daily from the GoatCounter API (all-time, country level; repo secret `GOATCOUNTER_TOKEN`); the page draws pins on `maps/world-land.svg` using `maps/country-centroids.json`. Needs a local server to preview (`fetch`/`<use>` fail on `file://`).
 - If Pages still 404s: Settings → Pages → toggle Source (GitHub Actions ↔ Deploy from a branch, main /root) and re-run, or delete the `github-pages` environment in Settings → Environments and re-run.
 - Open placeholders (`href="#"` with `✏️` markers): **Google Scholar** URL in the sidebar. Confirm the DSBA Lab URL (currently `http://dsba.snu.ac.kr`).
 

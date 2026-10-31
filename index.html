@@ -565,6 +565,23 @@
     color: var(--faint);
   }
 
+  /* ---------- visitor map ---------- */
+  .visitor-map { margin-top: 44px; }
+  .vm-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
+  .vm-head h3 { font-size: 15px; font-weight: 600; }
+  .vm-head p { font-family: var(--mono); font-size: 11.5px; color: var(--faint); }
+  .vm-visual { position: relative; margin-top: 14px; }
+  .vm-visual svg { display: block; width: 100%; height: auto; }
+  .vm-visual use { fill: var(--line); }
+  #vm-pins circle {
+    fill: var(--accent);
+    fill-opacity: .7;
+    stroke: var(--card);
+    stroke-width: 1;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
   /* ---------- scroll reveal (added by JS; no-JS keeps content visible) ---------- */
   .reveal { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
   .reveal.in { opacity: 1; transform: none; }
@@ -587,6 +604,9 @@
   }
   @media (max-width: 480px) {
     aside { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    #vm-pins circle { transform: scale(1.6); } /* keep pins visible when the map shrinks */
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -645,7 +665,7 @@
       <h1>Hankyeol Kim</h1>
       <div class="spectrum"></div>
       <p class="role">
-        Integrated M.S./Ph.D. Student<br>
+        M.S. Student (Ph.D. position starting in March 2027)<br>
         Industrial Engineering<br>
         <b>Seoul National University</b><br>
         <a href="http://dsba.snu.ac.kr" target="_blank" rel="noopener">DSBA Lab</a>
@@ -904,6 +924,20 @@
       </div>
     </section>
 
+    <!-- visitor map: pins come from visitors.json, refreshed by .github/workflows/visitors.yml; stays hidden if unavailable -->
+    <div class="card visitor-map" id="visitor-map" hidden>
+      <div class="vm-head">
+        <h3>Visitors</h3>
+        <p id="vm-summary"></p>
+      </div>
+      <div class="vm-visual">
+        <svg viewBox="0 0 720 284" role="img" aria-label="World map of visitor countries">
+          <use href="maps/world-land.svg#land"></use>
+          <g id="vm-pins"></g>
+        </svg>
+      </div>
+    </div>
+
     <footer>© 2026 Hankyeol Kim · Last updated Sep 2026<span class="visits" hidden> · <span id="visit-count"></span> visits</span></footer>
 
   </main>
@@ -1022,6 +1056,40 @@
       document.querySelector('footer .visits').hidden = false;
     })
     .catch(function () {});
+})();
+</script>
+
+<script>
+/* visitor map: all-time visits per country from visitors.json (the GoatCounter token
+   can't live in the page, so a GitHub Action writes this file); hidden if unavailable */
+(function () {
+  if (!window.fetch) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var pins = document.getElementById('vm-pins');
+  function getJSON(url) {
+    return fetch(url).then(function (r) { if (!r.ok) throw new Error(url); return r.json(); });
+  }
+  Promise.all([getJSON('visitors.json'), getJSON('maps/country-centroids.json')]).then(function (res) {
+    var data = res[0], centroids = res[1];
+    var shown = data.countries
+      .filter(function (c) { return centroids[c.id]; })
+      .sort(function (a, b) { return b.count - a.count; }); // small pins draw on top of large ones
+    if (!shown.length) return;
+    shown.forEach(function (c) {
+      /* same equirectangular projection as maps/world-land.svg */
+      var x = (centroids[c.id][0] + 180) * 2;
+      var y = (84 - centroids[c.id][1]) * 2;
+      var pin = document.createElementNS(NS, 'circle');
+      pin.setAttribute('cx', x);
+      pin.setAttribute('cy', y);
+      pin.setAttribute('r', Math.min(8, 3 + Math.sqrt(c.count) * 0.4).toFixed(2));
+      pins.appendChild(pin);
+    });
+    var updated = new Date(data.updated + 'T00:00:00Z').toLocaleDateString('en-US',
+      { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+    document.getElementById('vm-summary').textContent = 'Updated ' + updated;
+    document.getElementById('visitor-map').hidden = false;
+  }).catch(function () {});
 })();
 </script>
 

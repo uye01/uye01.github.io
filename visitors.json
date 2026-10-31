@@ -1,0 +1,45 @@
+{
+  "updated": "2026-10-31",
+  "countries": [
+    {
+      "id": "KR",
+      "name": "South Korea",
+      "count": 145
+    },
+    {
+      "id": "US",
+      "name": "United States",
+      "count": 12
+    },
+    {
+      "id": "BR",
+      "name": "Brazil",
+      "count": 1
+    },
+    {
+      "id": "CA",
+      "name": "Canada",
+      "count": 1
+    },
+    {
+      "id": "JP",
+      "name": "Japan",
+      "count": 1
+    },
+    {
+      "id": "NL",
+      "name": "Netherlands",
+      "count": 1
+    },
+    {
+      "id": "PL",
+      "name": "Poland",
+      "count": 1
+    },
+    {
+      "id": "SG",
+      "name": "Singapore",
+      "count": 1
+    }
+  ]
+}

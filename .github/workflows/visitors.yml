@@ -1,0 +1,43 @@
+# Writes all-time visits per country to visitors.json for the visitor map.
+# The GoatCounter token must stay secret, so the page reads this file instead of the API.
+name: Update visitor map
+
+on:
+  schedule:
+    - cron: '0 18 * * *'   # daily, 03:00 KST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch country totals
+        env:
+          GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
+        run: |
+          end=$(date -u -d tomorrow +%F)
+          curl -fsS -H "Authorization: Bearer $GOATCOUNTER_TOKEN" \
+            "https://uye01.goatcounter.com/api/v0/stats/locations?start=2020-01-01&end=$end&limit=200" \
+            -o "$RUNNER_TEMP/raw.json"
+          jq --arg d "$(date -u +%F)" \
+            '{updated: $d, countries: [.stats[] | select(.id != "") | {id, name, count}]}' \
+            "$RUNNER_TEMP/raw.json" > "$RUNNER_TEMP/new.json"
+
+      - name: Commit if the counts changed
+        run: |
+          if [ -f visitors.json ] && [ "$(jq -cS .countries visitors.json)" = "$(jq -cS .countries "$RUNNER_TEMP/new.json")" ]; then
+            echo "No change in visitor counts"
+            exit 0
+          fi
+          cp "$RUNNER_TEMP/new.json" visitors.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add visitors.json
+          git commit -m "Update visitor map data"
+          git pull --rebase origin main
+          git push origin main
