@@ -4,12 +4,12 @@
     {
       "id": "KR",
       "name": "South Korea",
-      "count": 145
+      "count": 155
     },
     {
       "id": "US",
       "name": "United States",
-      "count": 12
+      "count": 13
     },
     {
       "id": "BR",
@@ -39,6 +39,11 @@
     {
       "id": "SG",
       "name": "Singapore",
+      "count": 1
+    },
+    {
+      "id": "TW",
+      "name": "Taiwan",
       "count": 1
     }
   ]
