@@ -1,15 +1,25 @@
 {
-  "updated": "2026-11-03",
+  "updated": "2026-11-21",
   "countries": [
     {
       "id": "KR",
       "name": "South Korea",
-      "count": 235
+      "count": 382
     },
     {
       "id": "US",
       "name": "United States",
-      "count": 16
+      "count": 29
+    },
+    {
+      "id": "JP",
+      "name": "Japan",
+      "count": 2
+    },
+    {
+      "id": "TW",
+      "name": "Taiwan",
+      "count": 2
     },
     {
       "id": "BR",
@@ -24,11 +34,6 @@
     {
       "id": "HK",
       "name": "Hong Kong",
-      "count": 1
-    },
-    {
-      "id": "JP",
-      "name": "Japan",
       "count": 1
     },
     {
@@ -47,8 +52,8 @@
       "count": 1
     },
     {
-      "id": "TW",
-      "name": "Taiwan",
+      "id": "TN",
+      "name": "Tunisia",
       "count": 1
     }
   ]
