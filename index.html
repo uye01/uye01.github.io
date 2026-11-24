@@ -574,6 +574,9 @@
   .vm-visual { position: relative; margin-top: 14px; }
   .vm-visual svg { display: block; width: 100%; height: auto; }
   .vm-visual use { fill: var(--line); }
+  /* total visits, sitting in the empty South Pacific corner of the map */
+  .vm-total { position: absolute; left: 0; bottom: 0; font-family: var(--mono); font-size: 11.5px; color: var(--faint); }
+  .vm-total span { font-family: var(--head); font-size: 22px; font-weight: 600; color: var(--text); margin-right: 2px; }
   #vm-pins circle {
     fill: var(--accent);
     fill-opacity: .7;
@@ -608,6 +611,8 @@
   }
   @media (max-width: 480px) {
     #vm-pins circle { transform: scale(1.6); } /* keep pins visible when the map shrinks */
+    .vm-total { font-size: 10.5px; line-height: 1.2; }
+    .vm-total span { display: block; font-size: 17px; } /* stack so it stays clear of South America */
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -932,7 +937,7 @@
     <!-- visitor map: pins come from visitors.json, refreshed by .github/workflows/visitors.yml; stays hidden if unavailable -->
     <div class="card visitor-map" id="visitor-map" hidden>
       <div class="vm-head">
-        <h3>Visitors</h3>
+        <h3>Monthly Visitors</h3>
         <p id="vm-summary"></p>
       </div>
       <div class="vm-visual">
@@ -940,10 +945,11 @@
           <use href="maps/world-land.svg#land"></use>
           <g id="vm-pins"></g>
         </svg>
+        <p class="vm-total" hidden><span id="visit-count"></span> visits</p>
       </div>
     </div>
 
-    <footer>© 2026 Hankyeol Kim · Last updated Sep 2026<span class="visits" hidden> · <span id="visit-count"></span> visits</span></footer>
+    <footer>© 2026 Hankyeol Kim · Last updated Sep 2026</footer>
 
   </main>
 </div>
@@ -1049,7 +1055,7 @@
 <!-- ✏️ GoatCounter analytics (cookie-free). Replace "uye01" if your GoatCounter site code differs. -->
 <script data-goatcounter="https://uye01.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
-/* total visits in the footer; stays hidden if the counter is unavailable
+/* total visits on the visitor map; stays hidden if the counter is unavailable
    (requires GoatCounter setting "Allow using the visitor counter") */
 (function () {
   if (!window.fetch) return;
@@ -1058,7 +1064,7 @@
     .then(function (d) {
       if (!d || !d.count) return;
       document.getElementById('visit-count').textContent = d.count;
-      document.querySelector('footer .visits').hidden = false;
+      document.querySelector('.vm-total').hidden = false;
     })
     .catch(function () {});
 })();
