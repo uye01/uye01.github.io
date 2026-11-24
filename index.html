@@ -934,7 +934,8 @@
       </div>
     </section>
 
-    <!-- visitor map: pins come from visitors.json, refreshed by .github/workflows/visitors.yml; stays hidden if unavailable -->
+    <!-- ✏️ visitor map, temporarily hidden: remove this comment wrapper to show it again.
+         Pins come from visitors.json, refreshed by .github/workflows/visitors.yml; stays hidden if unavailable.
     <div class="card visitor-map" id="visitor-map" hidden>
       <div class="vm-head">
         <h3>Monthly Visitors</h3>
@@ -948,6 +949,7 @@
         <p class="vm-total" hidden><span id="visit-count"></span> visits</p>
       </div>
     </div>
+    -->
 
     <footer>© 2026 Hankyeol Kim · Last updated Sep 2026</footer>
 
@@ -1058,7 +1060,7 @@
 /* total visits on the visitor map; stays hidden if the counter is unavailable
    (requires GoatCounter setting "Allow using the visitor counter") */
 (function () {
-  if (!window.fetch) return;
+  if (!window.fetch || !document.getElementById('visit-count')) return;
   fetch('https://uye01.goatcounter.com/counter/TOTAL.json')
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (d) {
@@ -1077,6 +1079,7 @@
   if (!window.fetch) return;
   var NS = 'http://www.w3.org/2000/svg';
   var pins = document.getElementById('vm-pins');
+  if (!pins) return;
   function getJSON(url) {
     return fetch(url).then(function (r) { if (!r.ok) throw new Error(url); return r.json(); });
   }
