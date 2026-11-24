@@ -576,7 +576,7 @@
   .vm-visual use { fill: var(--line); }
   /* total visits, sitting in the empty South Pacific corner of the map */
   .vm-total { position: absolute; left: 0; bottom: 0; font-family: var(--mono); font-size: 11.5px; color: var(--faint); }
-  .vm-total span { font-family: var(--head); font-size: 22px; font-weight: 600; color: var(--text); margin-right: 2px; }
+  .vm-total span { font-family: var(--head); font-size: 13.5px; font-weight: 600; color: var(--text); margin-right: 2px; }
   #vm-pins circle {
     fill: var(--accent);
     fill-opacity: .7;
@@ -611,8 +611,8 @@
   }
   @media (max-width: 480px) {
     #vm-pins circle { transform: scale(1.6); } /* keep pins visible when the map shrinks */
-    .vm-total { font-size: 10.5px; line-height: 1.2; }
-    .vm-total span { display: block; font-size: 17px; } /* stack so it stays clear of South America */
+    .vm-total { font-size: 10.5px; }
+    .vm-total span { font-size: 12.5px; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
