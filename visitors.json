@@ -1,15 +1,15 @@
 {
-  "updated": "2026-11-22",
+  "updated": "2026-11-25",
   "countries": [
     {
       "id": "KR",
       "name": "South Korea",
-      "count": 387
+      "count": 398
     },
     {
       "id": "US",
       "name": "United States",
-      "count": 29
+      "count": 31
     },
     {
       "id": "JP",
