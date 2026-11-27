@@ -1,15 +1,15 @@
 {
-  "updated": "2026-11-25",
+  "updated": "2026-11-27",
   "countries": [
     {
       "id": "KR",
       "name": "South Korea",
-      "count": 398
+      "count": 407
     },
     {
       "id": "US",
       "name": "United States",
-      "count": 31
+      "count": 32
     },
     {
       "id": "JP",
@@ -34,6 +34,11 @@
     {
       "id": "HK",
       "name": "Hong Kong",
+      "count": 1
+    },
+    {
+      "id": "JO",
+      "name": "Hashemite Kingdom of Jordan",
       "count": 1
     },
     {
