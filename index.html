@@ -245,7 +245,7 @@
     z-index: 1;               /* above the aurora layer */
     max-width: 1260px;
     margin: 0 auto;
-    padding: 48px 28px 80px;
+    padding: 36px 28px 0;     /* no bottom padding: the sticky sidebar may run to the page end */
     display: grid;
     grid-template-columns: 250px 1fr;
     gap: 56px;
@@ -253,7 +253,8 @@
   }
 
   /* ================= SIDEBAR ================= */
-  aside { position: sticky; top: 96px; }
+  /* sticks exactly where it already sits (61px header + 36px layout padding), so it never shifts on scroll */
+  aside { position: sticky; top: 97px; }
   aside img.photo {
     width: 100%;
     max-width: 220px;
@@ -304,56 +305,42 @@
   aside .role a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .25em; }
   aside .role .note { display: block; margin: -3px 0 2px; font-size: 11.5px; } /* sits close under the line it qualifies */
 
-  aside .side-links { margin-top: 22px; list-style: none; }
-  aside .side-links li + li { margin-top: 7px; }
-  aside .side-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13.5px;
-    color: var(--muted);
+  /* contact box: email pill on top, round icon links in the middle, location at the bottom */
+  aside .contact {
+    max-width: 220px;
+    margin-top: 22px;
+    padding: 14px 14px 12px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--card);
+    box-shadow: 0 1px 2px rgba(20,24,40,.04), 0 8px 20px -14px rgba(20,24,40,.18);
+    text-align: center;
   }
-  aside .side-links a:hover { color: var(--accent); text-decoration: none; }
-  aside .side-links svg { width: 15px; height: 15px; flex-shrink: 0; fill: currentColor; opacity: .75; }
-  /* GitHub / LinkedIn in their own brand marks */
-  aside .side-links svg.brand-gh { fill: var(--text); opacity: 1; }
-  aside .side-links a:hover svg.brand-gh { fill: var(--accent); }
-  aside .side-links svg.brand-in { opacity: 1; }
-  aside .side-links .loc { display: inline-flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--muted); }
-  /* email: copies the address; a small copy icon turns into a check with a "Copied!" tag */
-  aside .copy-mail {
+  aside .contact svg { width: 15px; height: 15px; flex-shrink: 0; fill: currentColor; opacity: .75; }
+  aside .socials { display: flex; justify-content: center; gap: 12px; margin: 14px 0 12px; list-style: none; }
+  aside .soc {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0;
-    border: 0;
-    background: none;
-    font: inherit;
-    font-size: 13.5px;
+    display: grid;
+    place-items: center;
+    width: 36px; height: 36px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--bg);
     color: var(--muted);
-    cursor: pointer;
+    transition: border-color .2s ease, background .2s ease, transform .2s ease, color .2s ease;
   }
-  aside .copy-mail:hover { color: var(--accent); }
-  aside .copy-mail:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
-  aside .copy-mail .cm-icon { display: grid; margin-left: -4px; }
-  aside .side-links .cm-icon svg {
-    grid-area: 1 / 1;
-    width: 13px; height: 13px;
-    fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-    opacity: .6;
-    transition: opacity .2s ease, transform .2s ease;
-  }
-  aside .side-links .cm-icon .i-check { opacity: 0; transform: scale(.6); }
-  aside .copy-mail.copied { color: var(--accent); }
-  aside .copy-mail.copied .i-copy { opacity: 0; transform: scale(.6); }
-  aside .copy-mail.copied .i-check { opacity: 1; transform: none; }
-  aside .copy-mail .cm-tip {
+  aside .soc:hover { border-color: var(--accent); background: var(--accent-tint); color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+  aside .soc:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  aside .contact .soc svg { width: 17px; height: 17px; opacity: 1; }
+  aside .contact svg.brand-gh { fill: var(--text); }
+  aside .soc:hover svg.brand-gh { fill: var(--accent); }
+  /* name tag on hover / keyboard focus */
+  aside .soc::after {
+    content: attr(data-tip);
     position: absolute;
-    left: 100%;
-    top: 50%;
+    bottom: calc(100% + 6px);
+    left: 50%;
     z-index: 2;
-    margin-left: 8px;
     padding: 1px 7px;
     border-radius: 5px;
     background: var(--text);
@@ -362,11 +349,62 @@
     line-height: 1.6;
     white-space: nowrap;
     opacity: 0;
-    transform: translate(-4px, -50%);
+    transform: translate(-50%, 3px);
+    transition: opacity .15s ease, transform .15s ease;
+    pointer-events: none;
+  }
+  aside .soc:hover::after, aside .soc:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+  aside .contact .loc { display: flex; align-items: center; justify-content: center; gap: 6px; padding-top: 11px; border-top: 1px solid var(--line); font-size: 12px; color: var(--faint); }
+  aside .contact .loc svg { width: 13px; height: 13px; }
+  aside .copy-mail {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    font: inherit;
+    font-size: 12.5px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
+  }
+  aside .copy-mail:hover { border-color: var(--accent); background: var(--accent-tint); color: var(--accent); }
+  aside .copy-mail:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  aside .copy-mail .cm-icon { display: grid; margin-left: -4px; }
+  aside .contact .cm-icon svg {
+    grid-area: 1 / 1;
+    width: 13px; height: 13px;
+    fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    opacity: .6;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  aside .contact .cm-icon .i-check { opacity: 0; transform: scale(.6); }
+  aside .copy-mail.copied { border-color: var(--accent); background: var(--accent-tint); color: var(--accent); }
+  aside .copy-mail.copied .i-copy { opacity: 0; transform: scale(.6); }
+  aside .copy-mail.copied .i-check { opacity: 1; transform: none; }
+  aside .copy-mail .cm-tip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    z-index: 2;
+    padding: 1px 7px;
+    border-radius: 5px;
+    background: var(--text);
+    color: var(--bg);
+    font-size: 11px;
+    line-height: 1.6;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate(-50%, 3px);
     transition: opacity .2s ease, transform .2s ease;
     pointer-events: none;
   }
-  aside .copy-mail.copied .cm-tip { opacity: 1; transform: translate(0, -50%); }
+  aside .copy-mail.copied .cm-tip { opacity: 1; transform: translate(-50%, 0); }
 
   /* ================= MAIN ================= */
   main { min-width: 0; }
@@ -522,10 +560,13 @@
   }
   .rows .row:hover { background: var(--accent-tint); }
   .rows .row:hover::before { opacity: 1; transform: scaleY(1); }
-  .rows .row + .row { border-top: 1px solid var(--line); }
+  .rows .row + .row::after,
+  .pub + .pub::after { content: ""; position: absolute; top: 0; left: 12px; right: 12px; height: 1px; background: var(--line); }
   .rows .row.single { align-items: center; }
-  .rows .row:first-child { padding-top: 4px; }
-  .rows .row:last-child { padding-bottom: 4px; }
+  /* ---- 2. equal padding above and below so the hover tint stays centred on the row;
+     negative margins keep the rows where they were inside the card ---- */
+  .rows .row:first-child { margin-top: -11px; }
+  .rows .row:last-child { margin-bottom: -11px; }
   .dates {
     font-family: var(--mono);
     font-size: 11px;
@@ -536,6 +577,8 @@
   }
   .rows h3 { font-size: 15px; font-weight: 500; }
   .rows .sub { margin-top: 2px; font-size: 13.5px; color: var(--muted); }
+  /* education: degree on its own line under the school, smaller than the school name */
+  .rows .degree { font-size: 13.5px; font-weight: 500; color: var(--text); opacity: .82; }
   /* multi-line row (AIARA): title line centered on the 40px logo, dates level with it */
   .rows h3.head-center { min-height: 40px; display: flex; align-items: center; }
   @media (min-width: 861px) { .rows .row.head-row .dates { padding-top: 11px; } }
@@ -621,9 +664,8 @@
   }
   .pub:hover { background: var(--accent-tint); }
   .pub:hover::before { opacity: 1; transform: scaleY(1); }
-  .pub + .pub { border-top: 1px solid var(--line); }
-  .pub:first-child { padding-top: 4px; }
-  .pub:last-child { padding-bottom: 4px; }
+  .pub:first-child { margin-top: -12px; }
+  .pub:last-child { margin-bottom: -12px; }
   .pub h3 { font-size: 15px; font-weight: 500; }  /* same as .rows h3 (size, weight, line-height) */
   .pub .authors { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
   .pub .authors .me { color: var(--me); }
@@ -725,7 +767,7 @@
     flex-wrap: wrap;
     gap: 6px 16px;
     margin-top: 56px;
-    padding-top: 18px;
+    padding: 18px 0 28px;
     border-top: 1px solid var(--line);
     font-size: 12px;
     color: var(--faint);
@@ -759,15 +801,11 @@
 
   /* ================= RESPONSIVE ================= */
   @media (max-width: 860px) {
-    .layout { grid-template-columns: 1fr; gap: 40px; padding-top: 36px; }
+    .layout { grid-template-columns: 1fr; gap: 40px; padding-top: 28px; }
     aside { position: static; display: grid; grid-template-columns: 128px 1fr; gap: 22px; align-items: center; }
     aside img.photo { max-width: 128px; }
     aside h1 { margin-top: 0; }
-    aside .side-links { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
-    aside .side-links li + li { margin-top: 0; }
-    /* links share a line here: the "Copied!" tag goes above the icon instead of over GitHub */
-    aside .copy-mail .cm-tip { top: auto; bottom: calc(100% + 4px); left: auto; right: -8px; margin-left: 0; transform: translateY(3px); }
-    aside .copy-mail.copied .cm-tip { transform: none; }
+    aside .contact { margin-top: 14px; max-width: 280px; }
     .rows .row { grid-template-columns: 40px 1fr; }
     .rows .row .dates { grid-column: 2; text-align: left; padding-top: 0; }
     /* two rows: brand + theme toggle, then a one-line nav that scrolls sideways */
@@ -862,26 +900,23 @@
         <a href="http://dsba.snu.ac.kr" target="_blank" rel="noopener">DSBA Lab</a>
         <!-- ✏️ 연구실 홈페이지 URL이 다르면 수정하세요 -->
       </p>
-      <ul class="side-links">
-        <li><button class="copy-mail" type="button" data-email="hankyeol@snu.ac.kr" title="Copy email address">
+      <div class="contact">
+        <button class="copy-mail" type="button" data-email="hankyeol@snu.ac.kr" title="Copy email address">
           <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.24-8 5-8-5V6.51l8 5 8-5v1.73z"/></svg>
           <span>hankyeol@snu.ac.kr</span>
           <span class="cm-icon" aria-hidden="true"><svg class="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg><svg class="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
           <span class="cm-tip" role="status"></span>
-        </button></li>
-        <li><a href="https://github.com/uye01" target="_blank" rel="noopener">
-          <svg class="brand-gh" viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.91c.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.15c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-          GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/hankyeol-kim-798641266/" target="_blank" rel="noopener">
-          <svg class="brand-in" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0A66C2"/><circle cx="7.1" cy="7.2" r="1.7" fill="#fff"/><rect x="5.65" y="9.9" width="2.9" height="8.6" rx=".3" fill="#fff"/><path fill="#fff" d="M10.6 9.9h2.75v1.2c.42-.75 1.38-1.45 2.8-1.45 2.9 0 3.45 1.9 3.45 4.35v4.5h-2.85v-4c0-.95-.02-2.18-1.33-2.18-1.33 0-1.53 1.04-1.53 2.11v4.07H10.6Z"/></svg>
-          LinkedIn</a></li>
-        <li><a href="https://scholar.google.com/citations?user=TeoE3EAAAAAJ&hl=ko&oi=ao" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
-          Google Scholar</a></li>
-        <li><span class="loc">
-          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
-          Seoul, Republic of Korea</span></li>
-      </ul>
+        </button>
+        <ul class="socials">
+          <li><a class="soc" href="https://github.com/uye01" target="_blank" rel="noopener" aria-label="GitHub" data-tip="GitHub">
+            <svg class="brand-gh" viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.91c.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.15c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg></a></li>
+          <li><a class="soc" href="https://www.linkedin.com/in/hankyeol-kim-798641266/" target="_blank" rel="noopener" aria-label="LinkedIn" data-tip="LinkedIn">
+            <svg class="brand-in" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0A66C2"/><circle cx="7.1" cy="7.2" r="1.7" fill="#fff"/><rect x="5.65" y="9.9" width="2.9" height="8.6" rx=".3" fill="#fff"/><path fill="#fff" d="M10.6 9.9h2.75v1.2c.42-.75 1.38-1.45 2.8-1.45 2.9 0 3.45 1.9 3.45 4.35v4.5h-2.85v-4c0-.95-.02-2.18-1.33-2.18-1.33 0-1.53 1.04-1.53 2.11v4.07H10.6Z"/></svg></a></li>
+          <li><a class="soc" href="https://scholar.google.com/citations?user=TeoE3EAAAAAJ&hl=ko&oi=ao" target="_blank" rel="noopener" aria-label="Google Scholar" data-tip="Google Scholar">
+            <svg viewBox="0 0 24 24"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg></a></li>
+        </ul>
+        <p class="loc"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Seoul, Republic of Korea</p>
+      </div>
     </div>
   </aside>
 
@@ -930,16 +965,17 @@
         <div class="row">
           <img class="logo" src="logos/snu.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-          <h3>Seoul National University · Integrated M.S./Ph.D. in Industrial Engineering</h3>
-            <p class="sub">DSBA Lab</p>
-            <p class="sub">Advisor: <a href="https://dsba.snu.ac.kr/professor/">Prof. Pilsung Kang</a></p>
+            <h3>Seoul National University</h3>
+            <p class="degree">M.S. in Industrial Engineering</p>
+            <p class="sub">Data Science &amp; Business Analytics (DSBA) Lab. (Advisor: <a href="https://dsba.snu.ac.kr/professor/">Prof. Pilsung Kang</a>)</p>
           </div>
           <div class="dates">Mar 2025 — Present</div>
         </div>
-        <div class="row single">
+        <div class="row">
           <img class="logo" src="logos/snu.png" alt="" onerror="this.classList.add('noimg')">
           <div>
-          <h3>Seoul National University · B.S. in Physics and Astronomy</h3>
+            <h3>Seoul National University</h3>
+            <p class="degree">B.S. in Physics and Astronomy</p>
           </div>
           <div class="dates">Mar 2020 — Feb 2025</div>
         </div>
